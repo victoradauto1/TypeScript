@@ -46,5 +46,69 @@ console.log(resul)
  }, 2000)
 
 
-// tipos de obejto
+// avançando em union types
+function showUserRole (role: boolean | string){
+    if(typeof role === "boolean"){
+        return "USuário não aprovado"
+    }
+
+    return `A função do usuário é ${role}`
+
+}
+
+console.log(showUserRole(false))
+console.log(showUserRole("Admin"))
+
+// Type ALias
+
+type ID = string | number
+
+function showId(id: ID){
+    console.log(`O id é ${id}`)
+}
+
+console.log(showId(34))
+
+
+//interface
+
+interface Point {
+    a: number
+
+    b: number
+
+    c: number
+}
+
+function cord (obj: Point) {
+    console.log(`As coordenadas são A:${obj.a}, B:${obj.b} e C:${obj.c}`)
+}
+
+const cordObj={
+    a: 12,
+
+    b: 345,
+
+    c: 21
+}
+
+cord(cordObj)
+
+cord( {a:23, b:346, c:43})
+
+// interface vs type alias
+
+interface Person{
+    name: string
+}
+
+interface Person{
+    age: number
+}
+
+const somePerson:Person = {name:"Victor", age: 40}
+
+// no intrface é possível acrescentar valores, no type alias não é
+
+
 

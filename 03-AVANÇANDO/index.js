@@ -26,4 +26,28 @@ setTimeout(function () {
     const salary = 1000;
     //console.log(parseFloat(salary))
 }, 2000);
-// tipos de obejto
+// avançando em union types
+function showUserRole(role) {
+    if (typeof role === "boolean") {
+        return "USuário não aprovado";
+    }
+    return `A função do usuário é ${role}`;
+}
+console.log(showUserRole(false));
+console.log(showUserRole("Admin"));
+function showId(id) {
+    console.log(`O id é ${id}`);
+}
+console.log(showId(34));
+function cord(obj) {
+    console.log(`As coordenadas são A:${obj.a}, B:${obj.b} e C:${obj.c}`);
+}
+const cordObj = {
+    a: 12,
+    b: 345,
+    c: 21
+};
+cord(cordObj);
+cord({ a: 23, b: 346, c: 43 });
+const somePerson = { name: "Victor", age: 40 };
+// no intrface é possível acrescentar valores, no type alias não é
