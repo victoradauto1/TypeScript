@@ -110,5 +110,40 @@ const somePerson:Person = {name:"Victor", age: 40}
 
 // no intrface é possível acrescentar valores, no type alias não é
 
+// Literal Types
+
+let valor = "testando"
+
+// valor = true
+
+function showDirections (directions: "left" | "center " | "right"){
+    console.log(directions)
+}
+
+showDirections("left")
+// showDirections("bottom")
+
+// non null assertion operations
+
+const p = document.getElementById("some-p")
+
+// console.log(p!.innerText)
+
+// bigInt
+
+let n: bigint
+
+// n = 1
+
+console.log(n = 1000n)
+
+// symbol
+
+let symbolA = Symbol("A")
+let symbolB = Symbol("A")
+
+console.log(symbolA === symbolB)
+
+
 
 
