@@ -40,3 +40,9 @@ biggestNumber(2, 3);
 biggestNumber(459, 34);
 console.log(biggestNumber(2, 3));
 console.log(biggestNumber(459, 34));
+// 5- especificar tipos de argumentos
+function mergeArrays(arr1, arr2) {
+    return arr1.concat(arr2);
+}
+console.log(mergeArrays([23, 657, "bola"], [true, 456, "tapete"]));
+console.log(mergeArrays([12, 13, 14], ["vida", "avião"]));

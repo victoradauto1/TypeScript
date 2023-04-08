@@ -60,3 +60,12 @@ biggestNumber(459, 34)
 
 console.log(biggestNumber(2, 3))
 console.log(biggestNumber(459, 34))
+
+// 5- especificar tipos de argumentos
+
+function mergeArrays <T> (arr1: T[], arr2: T[]){
+    return arr1.concat(arr2)
+}
+
+console.log(mergeArrays([23,657, "bola"], [true, 456, "tapete"]))
+console.log(mergeArrays<number | string>([12,13, 14], ["vida", "avião"]))
