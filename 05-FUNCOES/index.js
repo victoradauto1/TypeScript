@@ -46,3 +46,14 @@ function mergeArrays(arr1, arr2) {
 }
 console.log(mergeArrays([23, 657, "bola"], [true, 456, "tapete"]));
 console.log(mergeArrays([12, 13, 14], ["vida", "avião"]));
+// 6 - parametros opcionais
+function modernGreeting(name, greet) {
+    if (greet) {
+        return `Olá, ${greet} ${name}`;
+    }
+    else {
+        return `Olá, ${name}`;
+    }
+}
+console.log(modernGreeting("Victor", "Sr"));
+console.log(modernGreeting("João"));
