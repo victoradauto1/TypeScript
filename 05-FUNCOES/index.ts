@@ -92,3 +92,39 @@ function somaDefault(num1: number, num2 = 10){
 
 console.log(somaDefault(10))
 console.log(somaDefault(30, 80))
+
+// 8- tipo unknow
+
+function doSomething(x: unknown){
+    console.log(x)
+}
+
+doSomething("1")
+
+// 9- never
+
+function shoErrorMessage (msg: string): never{
+    throw new Error(msg)
+
+}
+
+// shoErrorMessage("Algum erro")
+
+// 10- rest operator
+
+function sumAll(...n: number[]){
+    return n.reduce((number, sum)=> sum + number)
+}
+
+console.log(sumAll(23, 76, 87, 34))
+
+// 11- destructuring com parâmetro
+
+function showProductsDetails ({name, price}:{name:string, price:number}):string{
+    return `O nome do produto é ${name} e o seu valor é R$ ${price}`
+}
+
+const product = {name: "casaco", price: 120.00}
+
+
+console.log(showProductsDetails(product))
