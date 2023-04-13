@@ -85,3 +85,70 @@ const goku: SuperHuman = {name: "Goku", age:50, superpowers:["KameKameha", "Genk
 
 console.log(goku)
 console.log(goku.superpowers[1])
+
+// 6 - intersection tyoes
+
+interface Character {
+    name:string
+}
+
+interface Gun {
+    type:string
+    calibre:number
+}
+
+type humanWithGun = Character & Gun
+
+const arnold:humanWithGun = {
+    name: "Arnold",
+    type:"Shotgun",
+    calibre: 12
+}
+
+console.log(arnold)
+console.log(arnold.type)
+
+//7- readyolny array
+
+let myArray: ReadonlyArray<string> = ["Maçã", "Laranja", "Banana"]
+
+// myArray[3] = "Mamão"
+
+console.log(myArray)
+
+myArray.forEach((item)=>{
+    console.log("fruta:" + item)
+})
+
+myArray = myArray.map((set)=>{
+    return `Fruta: ${set}`
+})
+
+console.log(myArray)
+
+//8- tuplas
+
+type fiveNumbers = [ number, number, number, number, number]
+
+
+const myNumber: fiveNumbers = [1, 2, 3, 4, 5]
+// const myNumber2: fiveNumbers = [1,2,3 , 4 , 5, 6, 7]
+
+type nameAndAge = [string, number]
+
+const anotherUser: nameAndAge =  ["Matheus", 30]
+
+console.log(anotherUser[1])
+
+anotherUser[0]= "João"
+
+console.log(anotherUser)
+
+// 9- tuplas com readyolny
+
+function showNumbers (numbers: readonly [number, number]){
+    console.log(numbers[0])
+    console.log(numbers[1])
+}
+
+showNumbers([56, 57])

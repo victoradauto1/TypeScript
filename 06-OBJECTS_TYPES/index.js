@@ -32,3 +32,32 @@ const matheus = { name: 'Matheus', age: 31 };
 const goku = { name: "Goku", age: 50, superpowers: ["KameKameha", "Genki Dama"] };
 console.log(goku);
 console.log(goku.superpowers[1]);
+const arnold = {
+    name: "Arnold",
+    type: "Shotgun",
+    calibre: 12
+};
+console.log(arnold);
+console.log(arnold.type);
+//7- readyolny array
+let myArray = ["Maçã", "Laranja", "Banana"];
+// myArray[3] = "Mamão"
+console.log(myArray);
+myArray.forEach((item) => {
+    console.log("fruta:" + item);
+});
+myArray = myArray.map((set) => {
+    return `Fruta: ${set}`;
+});
+console.log(myArray);
+const myNumber = [1, 2, 3, 4, 5];
+const anotherUser = ["Matheus", 30];
+console.log(anotherUser[1]);
+anotherUser[0] = "João";
+console.log(anotherUser);
+// 9- tuplas com readyolny
+function showNumbers(numbers) {
+    console.log(numbers[0]);
+    console.log(numbers[1]);
+}
+showNumbers([56, 57]);
