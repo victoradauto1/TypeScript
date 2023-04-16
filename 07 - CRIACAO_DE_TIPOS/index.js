@@ -38,3 +38,20 @@ console.log(showCharName(MyChar, "name"));
 // 6- typeof type operator
 const userName = "Mahteus";
 const userName2 = "João";
+const myTruck = {
+    km: 100000,
+    kg: 5000,
+    description: "Caminhão par pouca carga"
+};
+function showKm(km) {
+    console.log(`O veículo tem a Km de de: ${km}`);
+}
+showKm(myTruck.km);
+const newCar = {
+    km: 5000,
+    kg: 1000,
+};
+showKm(newCar.km);
+const someVar = 5;
+const testing = "some text";
+const testing2 = "testando";

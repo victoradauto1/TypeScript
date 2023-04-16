@@ -74,3 +74,68 @@ const userName: string ="Mahteus"
 
 const userName2: typeof userName = "João"
 
+// 7- index acess type
+
+type Truck = {km: number, kg: number, description: string}
+
+type Km = Truck["km"]
+
+const myTruck: Truck = {
+    km: 100000,
+    kg: 5000,
+    description: "Caminhão par pouca carga"
+}
+
+function showKm(km: Km){
+    console.log(`O veículo tem a Km de de: ${km}`)
+}
+
+showKm(myTruck.km)
+
+const newCar = {
+    km: 5000,
+    kg: 1000,
+
+}
+
+showKm(newCar.km)
+
+
+// 8-conditional types
+
+interface A {
+
+}
+
+interface B extends A {
+
+}
+
+
+interface Teste {
+    showName(): string
+}
+
+type myType = B extends A ? number : string
+
+const someVar: myType = 5
+
+type myTypeB = Teste extends {showNumber(): number}? string : boolean
+
+// 9-template literals type
+
+type testA = "text"
+
+type customType = `some ${testA}`
+
+const testing: customType = "some text"
+
+type a1 = "testando"
+type a2 = "Union"
+
+type a3 = `${a1} ${a2}` | `${a1}` | `${a2}`
+
+const testing2: a3 = "testando"
+
+
+
