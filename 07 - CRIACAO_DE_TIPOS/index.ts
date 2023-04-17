@@ -137,5 +137,7 @@ type a3 = `${a1} ${a2}` | `${a1}` | `${a2}`
 
 const testing2: a3 = "testando"
 
+// 10- 
+
 
 
