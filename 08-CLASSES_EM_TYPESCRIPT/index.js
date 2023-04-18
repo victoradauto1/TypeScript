@@ -202,3 +202,80 @@ pObj.showName();
 // class TestingPrivate extends PrivateClass{
 // }
 pObj.showPrivateMethod();
+//14- static members
+class StaticMembers {
+    static StaticMethod() {
+        console.log("Este método estático e não esá instanciado");
+    }
+}
+StaticMembers.prop = "Teste static";
+console.log(StaticMembers.prop); //Só conseguimos acessar o valor de props, um classe sem estar instanciada, porque atribuimos através da palavra reservada 'static' essa propriedade de 'visivilidade' ou 'legibilidade' para tal.
+StaticMembers.StaticMethod(); // o mesmo se aplica a funções
+//15- generic class
+class Item {
+    constructor(first, second) {
+        this.first = first;
+        this.second = second;
+    }
+    get showFirst() {
+        return `O first é ${this.first} `;
+    }
+}
+const newItem = new Item("caixa", "surpresa");
+console.log(newItem);
+console.log(newItem.showFirst);
+console.log(typeof newItem.first);
+const secondItem = new Item("23", false);
+console.log(secondItem);
+//16- parameters classes
+class ParametersProperties {
+    constructor(name, qty, price) {
+        this.name = name;
+        this.qty = qty;
+        this.price = price;
+        this.name = name;
+        this.qty = qty;
+        this.price = price;
+    }
+    get showQty() {
+        return `qty:${this.qty}`;
+    }
+    get showPrice() {
+        return `price: ${this.price}`;
+    }
+}
+const newShort = new ParametersProperties("camisa", 12, 59.90);
+console.log(newShort.name);
+// console.log(newShort.qty)
+console.log(newShort.showPrice);
+console.log(newShort.showQty);
+//17- class expression
+const myClass = class {
+    constructor(name, age) {
+        this.name = name;
+        this.age = age;
+    }
+};
+const pessoa = new myClass("Jonas", 31);
+//18- Abstract class
+class AbstractClassExample {
+}
+// const anotherObj = new AbstractClassExample
+class AbstractContinue extends AbstractClassExample {
+    constructor(name) {
+        super();
+        this.name = name;
+    }
+    showName() {
+        console.log(`O nome é ${this.name}`);
+    }
+}
+const newAbstractName = new AbstractContinue("Matheus");
+newAbstractName.showName();
+// 19-Relação entre classes
+class Dog {
+}
+class Cat {
+}
+const doguinho = new Cat();
+console.log(doguinho);
