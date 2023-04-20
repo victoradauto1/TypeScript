@@ -47,3 +47,80 @@ __decorate([
 ], MultipleDecorators.prototype, "testing", null);
 const multiple = new MultipleDecorators();
 multiple.testing();
+//3-class decorator
+function classDec(constructor) {
+    console.log(constructor);
+    if (constructor.name === "User") {
+        console.log("Criando usuário");
+    }
+}
+let User = class User {
+    constructor(name) {
+        this.name = name;
+    }
+};
+User = __decorate([
+    classDec
+], User);
+const matheus = new User("Matheus");
+console.log(matheus);
+//4- method decorator
+function enumerable(value) {
+    return function (taget, propertyKey, descriptor) {
+        descriptor.enumerable = value;
+    };
+}
+class Machine {
+    constructor(name) {
+        this.name = name;
+    }
+    showName() {
+        console.log(this);
+        return `O nome da máquina é ${this.name}`;
+    }
+}
+__decorate([
+    enumerable(true)
+], Machine.prototype, "showName", null);
+const trator = new Machine("Trator");
+console.log(trator.showName());
+//5 - acessor decorator
+class Monster {
+    constructor(name, age) {
+        this.name = name;
+        this.age = age;
+    }
+    get showName() {
+        return `Nome o monstro: ${this.name}`;
+    }
+    get showAge() {
+        return `A idade do monstro é ${this.age}`;
+    }
+}
+__decorate([
+    enumerable(true)
+], Monster.prototype, "showName", null);
+__decorate([
+    enumerable(true)
+], Monster.prototype, "showAge", null);
+const charmander = new Monster("Charmander", 10);
+console.log(charmander);
+//6- property decorators
+function formatNUmber() {
+    return function (target, propertyKey) {
+        let value;
+        const getter = function () {
+            return value;
+        };
+        const setter = function (newVal) {
+            value = newVal.padStart(5, "0");
+        };
+    };
+}
+class ID {
+    constructor(id) {
+        this.id = id;
+    }
+}
+const newItem = new ID("1");
+console.log(newItem);
