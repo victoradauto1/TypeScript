@@ -106,6 +106,7 @@ __decorate([
 const charmander = new Monster("Charmander", 10);
 console.log(charmander);
 //6- property decorators
+// o resultado esperado é adicionar 5 casas ao valor numérico
 function formatNUmber() {
     return function (target, propertyKey) {
         let value;
@@ -115,6 +116,10 @@ function formatNUmber() {
         const setter = function (newVal) {
             value = newVal.padStart(5, "0");
         };
+        Object.defineProperty(target, propertyKey, {
+            set: setter,
+            get: getter
+        });
     };
 }
 class ID {
@@ -122,5 +127,62 @@ class ID {
         this.id = id;
     }
 }
+__decorate([
+    formatNUmber()
+], ID.prototype, "id", void 0);
 const newItem = new ID("1");
 console.log(newItem);
+//7- exemploe real com class decorator
+function createDate(created) {
+    created.prototype.createdAt = new Date();
+}
+let Book = class Book {
+    constructor(id) {
+        this.id = id;
+    }
+};
+Book = __decorate([
+    createDate
+], Book);
+let Pen = class Pen {
+    constructor(id) {
+        this.id = id;
+    }
+};
+Pen = __decorate([
+    createDate
+], Pen);
+const newBook = new Book(12);
+const bluePen = new Pen(55);
+console.log(newBook);
+console.log(bluePen);
+console.log(bluePen.createdAt);
+//8- exemplo real de metodo decorator
+function checkIfPosted() {
+    return function (target, key, descriptor) {
+        const childrenFunction = descriptor.value;
+        console.log(childrenFunction);
+        descriptor.value = function (...arg) {
+            if (arg[1] === true) {
+                console.log("Usuário já postou");
+                return null;
+            }
+            else { }
+        };
+    };
+}
+class Post {
+    constructor() {
+        this.alreadyPosted = false;
+    }
+    post(content, alreadyPosted) {
+        this.alreadyPosted = true;
+        console.log(`Post do usuário ${content}`);
+    }
+}
+__decorate([
+    checkIfPosted()
+], Post.prototype, "post", null);
+const novoPost = new Post();
+novoPost.post("Meu primeiro Post!", novoPost.alreadyPosted);
+novoPost.post("Meu primeiro Post!", novoPost.alreadyPosted);

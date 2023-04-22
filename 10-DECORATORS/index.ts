@@ -138,6 +138,8 @@ console.log(charmander)
 
 //6- property decorators
 
+// o resultado esperado é adicionar 5 casas ao valor numérico
+
 function formatNUmber(){
     return function(target: object, propertyKey: string){
         
@@ -150,9 +152,15 @@ function formatNUmber(){
         const setter = function(newVal: string) {
             value = newVal.padStart(5, "0")
         }
+
+        Object.defineProperty(target, propertyKey, {
+            set: setter,
+            get: getter
+        })
     } 
 }
 class ID{
+    @formatNUmber()
     id
 
     constructor (id: string){
@@ -163,3 +171,74 @@ class ID{
 const newItem = new ID("1")
 
 console.log(newItem)
+
+//7- exemploe real com class decorator
+
+function createDate(created: Function){
+    created.prototype.createdAt = new Date()
+}
+
+@createDate
+class Book{
+    id
+    createdAt?: Date
+
+    constructor(id: number){
+        this.id = id
+
+    }
+}
+
+@createDate
+class Pen{
+    id
+    createdAt?: Date
+
+    constructor(id: number){
+        this.id = id
+
+    }
+}
+
+const newBook = new Book(12)
+const bluePen = new Pen(55)
+
+console.log(newBook)
+console.log(bluePen)
+console.log(bluePen.createdAt)
+
+//8- exemplo real de metodo decorator
+
+function checkIfPosted(){
+
+    return function (
+        target: Object, 
+        key: string | Symbol, 
+        descriptor: PropertyDescriptor
+        ){
+            const childrenFunction = descriptor.value
+            console.log(childrenFunction)
+            descriptor.value =  function(...arg: any[]){
+                if(arg[1] ===true){
+                    console.log("Usuário já postou")
+                    return null
+                }else{ }
+            }
+        }
+}
+class Post{
+    alreadyPosted = false
+
+    @checkIfPosted()
+    post( content: string, alreadyPosted: boolean ){
+        this.alreadyPosted = true
+        console.log(`Post do usuário ${content}`)
+    }
+
+}
+
+const novoPost = new Post()
+
+novoPost.post("Meu primeiro Post!", novoPost.alreadyPosted)
+
+novoPost.post("Meu primeiro Post!", novoPost.alreadyPosted)
