@@ -160,15 +160,18 @@ console.log(bluePen.createdAt);
 //8- exemplo real de metodo decorator
 function checkIfPosted() {
     return function (target, key, descriptor) {
-        const childrenFunction = descriptor.value;
-        console.log(childrenFunction);
+        const childFunction = descriptor.value;
+        console.log(childFunction);
         descriptor.value = function (...arg) {
             if (arg[1] === true) {
                 console.log("Usuário já postou");
                 return null;
             }
-            else { }
+            else {
+                return childFunction.apply(this, arg);
+            }
         };
+        return descriptor;
     };
 }
 class Post {
@@ -185,4 +188,36 @@ __decorate([
 ], Post.prototype, "post", null);
 const novoPost = new Post();
 novoPost.post("Meu primeiro Post!", novoPost.alreadyPosted);
-novoPost.post("Meu primeiro Post!", novoPost.alreadyPosted);
+novoPost.post("Meu segundo Post!", novoPost.alreadyPosted);
+//9-exemplo real com property decorator
+function max(limit) {
+    return function (target, propertyKey) {
+        let value;
+        const getter = function () {
+            return value;
+        };
+        const setter = function (newVal) {
+            if (newVal.length > limit) {
+                console.log(`ATENÇÃO! O valor deve ter no máximo ${limit} caracteres.`);
+                return;
+            }
+            else {
+                value = newVal;
+            }
+        };
+        Object.defineProperty(target, propertyKey, {
+            get: getter,
+            set: setter
+        });
+    };
+}
+class Admin {
+    constructor(username) {
+        this.username = username;
+    }
+}
+__decorate([
+    max(8)
+], Admin.prototype, "username", void 0);
+const victor = new Admin("Victor");
+const matheusBatisti = new Admin("MatheusBatisiti");

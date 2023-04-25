@@ -216,14 +216,18 @@ function checkIfPosted(){
         key: string | Symbol, 
         descriptor: PropertyDescriptor
         ){
-            const childrenFunction = descriptor.value
-            console.log(childrenFunction)
+            const childFunction = descriptor.value
+            console.log(childFunction)
             descriptor.value =  function(...arg: any[]){
                 if(arg[1] ===true){
                     console.log("Usuário já postou")
                     return null
-                }else{ }
+                }else{ 
+                    return childFunction.apply(this, arg)
+                }
             }
+
+            return descriptor
         }
 }
 class Post{
@@ -241,4 +245,49 @@ const novoPost = new Post()
 
 novoPost.post("Meu primeiro Post!", novoPost.alreadyPosted)
 
-novoPost.post("Meu primeiro Post!", novoPost.alreadyPosted)
+novoPost.post("Meu segundo Post!", novoPost.alreadyPosted)
+
+//9-exemplo real com property decorator
+
+function max (limit: number){
+
+    return function(target: Object, propertyKey: string ){
+        
+        let value: string
+
+        const getter = function(){
+            return value
+        }
+
+        const setter = function(newVal: string){
+            if(newVal.length > limit){
+                console.log(`ATENÇÃO! O valor deve ter no máximo ${limit} caracteres.`)
+                return
+            } else{
+                value = newVal
+            }
+        }
+
+        Object.defineProperty(target, propertyKey, {
+            get: getter,
+            set: setter
+        })
+
+    }
+}
+
+
+class Admin{
+    @max(8)
+    username
+
+  
+    constructor(username: string){
+        this.username = username
+
+    }
+}
+
+const victor  = new Admin("Victor")
+
+const matheusBatisti = new Admin("MatheusBatisiti")
