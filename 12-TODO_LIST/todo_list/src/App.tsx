@@ -16,11 +16,11 @@ function App() {
       <main className={styles.main}>
         <div>
           <h2>O que você vai fazer?</h2>
-          <TaskFrom btnText="Criar Tarefa" />
+          <TaskFrom btnText="Criar Tarefa"  setTaskList={setTaskList}/>
         </div>
         <div>
           <h2>Sua tarefas:</h2>
-          <TaskList />
+          <TaskList taskList={taskList}/>
         </div>
       </main>
       <Footer />
