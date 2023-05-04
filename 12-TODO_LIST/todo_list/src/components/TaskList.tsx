@@ -6,11 +6,26 @@ interface Props {
   taskList:ITask[]
 }
 
-const TaskList = ({tasklist}: Props) => {
+const TaskList = ({taskList}:Props) => {
   return (
-    <div>
-        <h2>lista de tarefas</h2>
-    </div>
+    <>
+    {taskList.length > 0 ? (
+      taskList.map((task)=>(
+        <div key={task.id} className={styles.task}>
+          <div className={styles.details}>
+            <h4>{task.title}</h4>
+            <p>Dificuldade: {task.title}</p>
+          </div>
+          <div className={styles.actions}>
+            <i className="bi bi-pencil"></i>
+            <i className="bi bi-trash"></i>
+          </div>
+        </div>
+      ))
+    ):(
+      <p>Não há tarefas cadastradas</p>
+    )}
+    </>
   )
 }
 
