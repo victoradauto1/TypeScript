@@ -1,18 +1,26 @@
 import styles from './TaskForm.module.css'
 import { ITask } from '../interface/Task'
 import { useState, ChangeEvent, FormEvent, useEffect } from 'react'
-import TaskList from './TaskList'
 
 interface Props{
     btnText: string
     taskList: ITask[]
     setTaskList?: React.Dispatch<React.SetStateAction<ITask[]>>
+    task?:ITask | null;
 }
-const TaskFrom = ({btnText, taskList, setTaskList}: Props) => {
+const TaskFrom = ({btnText, taskList, setTaskList, task}: Props) => {
 
     const [id, setId] = useState<number>(0)
     const [title, setTilte] = useState<string>("")
     const [difficult, setDifficult] = useState<number>(0)
+
+    useEffect(()=>{
+        if(task){
+            setId(task.id)
+            setTilte(task.title)
+            setDifficult(task.difficult)
+        }
+    },[task])
 
     const addTaskHandler = (e: FormEvent<HTMLFormElement>) =>{
         e.preventDefault();
@@ -21,12 +29,12 @@ const TaskFrom = ({btnText, taskList, setTaskList}: Props) => {
 
         const newTask: ITask = {id, title, difficult}
 
-        setTaskList!([...taskList, newTask])
+        if (setTaskList) {
+            setTaskList([...taskList, newTask])
+        }
 
         setTilte("")
         setDifficult(0)
-
-        console.log(taskList)
     }
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) =>{
@@ -35,23 +43,21 @@ const TaskFrom = ({btnText, taskList, setTaskList}: Props) => {
         } else{
             setDifficult(parseInt(e.target.value))
         }
-
-
     }
 
-  return (
-   <form className={styles.form} onSubmit={addTaskHandler}>
-    <div className={styles.input_container}>
-        <label htmlFor="title">Título: </label>
-        <input type="text" placeholder="Título da tarefa" name="title" onChange={handleChange} value={title}/>
-    </div>
-    <div className={styles.input_container}>
-        <label htmlFor="difficult">Título:</label>
-        <input type="text" name="difficult" placeholder="Título da tarefa"  onChange={handleChange} value={difficult}/>
-    </div>
-    <input type="submit" value={btnText}/>
-   </form>
-  )
+    return (
+        <form className={styles.form} onSubmit={addTaskHandler}>
+            <div className={styles.input_container}>
+                <label htmlFor="title">Título: </label>
+                <input type="text" placeholder="Título da tarefa" name="title" onChange={handleChange} value={title}/>
+            </div>
+            <div className={styles.input_container}>
+                <label htmlFor="difficult">Dificuldade:</label>
+                <input type="text" name="difficult" placeholder="Dificuldade da tarefa"  onChange={handleChange} value={difficult}/>
+            </div>
+            <input type="submit" value={btnText}/>
+        </form>
+    )
 }
 
 export default TaskFrom
