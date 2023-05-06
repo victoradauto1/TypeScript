@@ -32,6 +32,14 @@ function App() {
     hideOrShowModal(true);
     setTaskToUpdate(task);
   };
+  
+  const updateTask = (id: number, title: string, difficult: number) =>{
+
+    const updateTask: ITask = { id, title, difficult}
+    
+    const updatedItems = taskList.map()
+  }
+
 
   return (
     <div>
