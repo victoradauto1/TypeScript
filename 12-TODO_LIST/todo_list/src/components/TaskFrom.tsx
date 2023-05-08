@@ -7,7 +7,7 @@ interface Props {
   taskList: ITask[];
   setTaskList?: React.Dispatch<React.SetStateAction<ITask[]>>;
   task?: ITask | null;
-  handleUpdate?(): null;
+  handleUpdate?(id: number, title: string, difficult: number): void;
 }
 const TaskFrom = ({ btnText, taskList, setTaskList, task, handleUpdate }: Props) => {
   const [id, setId] = useState<number>(0);
@@ -26,7 +26,7 @@ const TaskFrom = ({ btnText, taskList, setTaskList, task, handleUpdate }: Props)
     e.preventDefault();
 
     if (handleUpdate) {
-      console.log(handleUpdate);
+      handleUpdate(id, title, difficult)
     } else {
       const id = Math.floor(Math.random() * 1000);
 

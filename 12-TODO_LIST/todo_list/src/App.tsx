@@ -37,14 +37,20 @@ function App() {
 
     const updateTask: ITask = { id, title, difficult}
     
-    const updatedItems = taskList.map()
+    const updatedItems = taskList.map((task)=>{
+      return task.id === updateTask.id ? updateTask : task
+    })
+
+    setTaskList(updatedItems)
+
+    hideOrShowModal(false)
   }
 
 
   return (
     <div>
       <Modal
-        children={<TaskFrom btnText="Editar Tarefa" taskList={taskList} task={taskToUpdate}/>}
+        children={<TaskFrom btnText="Editar Tarefa" taskList={taskList} task={taskToUpdate} />}
       />
       <Header />
       <main className={styles.main}>
